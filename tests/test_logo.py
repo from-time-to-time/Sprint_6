@@ -9,16 +9,16 @@ import allure
 
 
 class TestLogosNavigation:
-    @allure.title('Проверка перехода на главную страницу при нажатии на лого "Самокат"')  # декораторы
+    @allure.title('Проверка перехода на главную страницу при нажатии на лого "Самокат"')
     def test_logo_samokat_navigates_home(self, driver):
         home = BasePage(driver).open()
         home.try_accept_cookies()
         home.wait_visible(H.UP_ORDER_BUTTON).click()
         home.wait_visible(B.SAMOKAT_LOGO).click()
 
-        assert driver.current_url == Config.URL, f"Ожидали {Config.URL}, а получили {driver.current_url}"
+        assert home.get_current_url() == Config.URL, f"Ожидали {Config.URL}, а получили {home.get_current_url()}"
 
-    @allure.title('Проверка открытия страницы "Дзен" в новой вкладке при нажатии на лого "Яндекс"')  # декораторы
+    @allure.title('Проверка открытия страницы "Дзен" в новой вкладке при нажатии на лого "Яндекс"')
     def test_logo_yandex_opens_dzen_in_new_tab(self, driver):
         home = BasePage(driver).open()
 
@@ -31,4 +31,4 @@ class TestLogosNavigation:
 
         driver.switch_to.window(after[-1])
         WebDriverWait(driver, Config.TIMEOUT).until(EC.url_contains("dzen.ru"))
-        assert "dzen.ru" in driver.current_url, f"Ожидали Дзен, а получили: {driver.current_url}"
+        assert "dzen.ru" in home.get_current_url(), f"Ожидали Дзен, а получили: {home.get_current_url()}"

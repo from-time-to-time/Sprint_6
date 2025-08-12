@@ -22,7 +22,7 @@ order_test_data = [
 class TestPositiveOrderFlow:
 
     @pytest.mark.parametrize("button_locator, first, second", order_test_data)
-    @allure.title('Проверка оформления заказа самоката')  # декораторы
+    @allure.title('Проверка оформления заказа самоката')
     def test_order_positive_flow(self, driver, button_locator, first, second):
 
         home = HomePage(driver).open()
